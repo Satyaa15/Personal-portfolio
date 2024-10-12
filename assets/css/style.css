@@ -1142,6 +1142,15 @@ main {
 }
 
 .contact-form { margin-bottom: 10px; }
+.get-in-touch {
+  background-color: white; /* White background for the Get in Touch section */
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+
 
 .form-title { margin-bottom: 20px; }
 
@@ -1160,6 +1169,7 @@ main {
   border: 1px solid var(--jet);
   border-radius: 14px;
   outline: none;
+  
 }
 
 .form-input::placeholder { font-weight: var(--fw-500); }
@@ -1625,6 +1635,79 @@ textarea.form-input::-webkit-resizer { display: none; }
   /* portfolio and blog grid */
 
   .project-list, .blog-posts-list { grid-template-columns: 1fr 1fr; }
+
+/* Styling for the gallery grid */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columns */
+  grid-template-rows: repeat(4, 1fr); /* 4 rows */
+  gap: 10px; /* Gap between grid items */
+  padding: 20px;
+  width: 100%;
+  max-width: 1200px; /* Optional: set a max width to limit the gallery size */
+  margin: auto; /* Center the gallery horizontally */
+}
+
+.gallery-item {
+  width: 100%; /* Image should take up the full width of the grid cell */
+  height: auto;
+  aspect-ratio: 1; /* Ensure a square aspect ratio */
+  overflow: hidden;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the image covers the entire grid area without distortion */
+  cursor: pointer;
+  transition: transform 0.3s ease; /* Smooth hover effect */
+}
+
+.gallery-item img:hover {
+  transform: scale(1.05); /* Slight zoom on hover */
+}
+
+/* Modal styling (for full image view) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8); /* Dark background */
+}
+
+.modal-content {
+  margin: auto;
+  display: block;
+  max-width: 80%; /* Maximum width for enlarged image */
+  max-height: 80%; /* Maximum height for enlarged image */
+}
+
+.modal-close {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  font-size: 40px;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+  .gallery {
+    grid-template-columns: repeat(2, 1fr); /* Adjust to 2 columns on smaller screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .gallery {
+    grid-template-columns: repeat(1, 1fr); /* Adjust to 1 column on mobile devices */
+  }
+}
 
 
 

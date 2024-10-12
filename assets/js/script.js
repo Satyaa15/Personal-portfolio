@@ -1,106 +1,68 @@
 'use strict';
 
+// Element toggle function
+const elementToggleFunc = function (elem) { 
+  elem.classList.toggle("active"); 
+}
 
-
-// element toggle function
-const elementToggleFunc = function (elem) { elem.classList.toggle("active"); }
-
-
-
-// sidebar variables
+// Sidebar variables
 const sidebar = document.querySelector("[data-sidebar]");
 const sidebarBtn = document.querySelector("[data-sidebar-btn]");
 
-// sidebar toggle functionality for mobile
-sidebarBtn.addEventListener("click", function () { elementToggleFunc(sidebar); });
-
-
-
-// testimonials variables
-const testimonialsItem = document.querySelectorAll("[data-testimonials-item]");
-const modalContainer = document.querySelector("[data-modal-container]");
-const modalCloseBtn = document.querySelector("[data-modal-close-btn]");
-const overlay = document.querySelector("[data-overlay]");
-
-// modal variable
-const modalImg = document.querySelector("[data-modal-img]");
-const modalTitle = document.querySelector("[data-modal-title]");
-const modalText = document.querySelector("[data-modal-text]");
-
-// modal toggle function
-const testimonialsModalFunc = function () {
-  modalContainer.classList.toggle("active");
-  overlay.classList.toggle("active");
-}
-
-// add click event to all modal items
-for (let i = 0; i < testimonialsItem.length; i++) {
-
-  testimonialsItem[i].addEventListener("click", function () {
-
-    modalImg.src = this.querySelector("[data-testimonials-avatar]").src;
-    modalImg.alt = this.querySelector("[data-testimonials-avatar]").alt;
-    modalTitle.innerHTML = this.querySelector("[data-testimonials-title]").innerHTML;
-    modalText.innerHTML = this.querySelector("[data-testimonials-text]").innerHTML;
-
-    testimonialsModalFunc();
-
+// Sidebar toggle functionality for mobile
+if (sidebarBtn && sidebar) {
+  sidebarBtn.addEventListener("click", function () { 
+    elementToggleFunc(sidebar); 
   });
-
 }
 
-// add click event to modal close button
-modalCloseBtn.addEventListener("click", testimonialsModalFunc);
-overlay.addEventListener("click", testimonialsModalFunc);
+// Removed Testimonials Modal Functionality
+// If you have a Testimonials section in the future, you can re-add this functionality accordingly.
 
-
-
-// custom select variables
+// Custom select variables
 const select = document.querySelector("[data-select]");
 const selectItems = document.querySelectorAll("[data-select-item]");
-const selectValue = document.querySelector("[data-selecct-value]");
+const selectValue = document.querySelector("[data-select-value]"); // Fixed typo from data-selecct-value to data-select-value
 const filterBtn = document.querySelectorAll("[data-filter-btn]");
 
-select.addEventListener("click", function () { elementToggleFunc(this); });
+// Custom select toggle functionality
+if (select && selectItems.length > 0) {
+  select.addEventListener("click", function () { 
+    elementToggleFunc(this); 
+  });
 
-// add event in all select items
-for (let i = 0; i < selectItems.length; i++) {
-  selectItems[i].addEventListener("click", function () {
-
-    let selectedValue = this.innerText.toLowerCase();
-    selectValue.innerText = this.innerText;
-    elementToggleFunc(select);
-    filterFunc(selectedValue);
-
+  // Add event to all select items
+  selectItems.forEach(item => {
+    item.addEventListener("click", function () {
+      let selectedValue = this.innerText.toLowerCase();
+      selectValue.innerText = this.innerText;
+      elementToggleFunc(select);
+      filterFunc(selectedValue);
+    });
   });
 }
 
-// filter variables
+// Filter variables
 const filterItems = document.querySelectorAll("[data-filter-item]");
 
+// Filter function
 const filterFunc = function (selectedValue) {
-
-  for (let i = 0; i < filterItems.length; i++) {
-
+  filterItems.forEach(item => {
     if (selectedValue === "all") {
-      filterItems[i].classList.add("active");
-    } else if (selectedValue === filterItems[i].dataset.category) {
-      filterItems[i].classList.add("active");
+      item.classList.add("active");
+    } else if (selectedValue === item.dataset.category) {
+      item.classList.add("active");
     } else {
-      filterItems[i].classList.remove("active");
+      item.classList.remove("active");
     }
-
-  }
-
+  });
 }
 
-// add event in all filter button items for large screen
+// Add event to all filter button items for large screen
 let lastClickedBtn = filterBtn[0];
 
-for (let i = 0; i < filterBtn.length; i++) {
-
-  filterBtn[i].addEventListener("click", function () {
-
+filterBtn.forEach(btn => {
+  btn.addEventListener("click", function () {
     let selectedValue = this.innerText.toLowerCase();
     selectValue.innerText = this.innerText;
     filterFunc(selectedValue);
@@ -108,52 +70,73 @@ for (let i = 0; i < filterBtn.length; i++) {
     lastClickedBtn.classList.remove("active");
     this.classList.add("active");
     lastClickedBtn = this;
-
   });
+});
 
-}
+// Removed Contact Form Functionality
+// Since the Contact form is removed, no need to handle it.
 
+// Clickable map image
+const mapImageLink = document.querySelector("[data-map-img]");
 
-
-// contact form variables
-const form = document.querySelector("[data-form]");
-const formInputs = document.querySelectorAll("[data-form-input]");
-const formBtn = document.querySelector("[data-form-btn]");
-
-// add event to all form input field
-for (let i = 0; i < formInputs.length; i++) {
-  formInputs[i].addEventListener("input", function () {
-
-    // check form validation
-    if (form.checkValidity()) {
-      formBtn.removeAttribute("disabled");
-    } else {
-      formBtn.setAttribute("disabled", "");
-    }
-
+if (mapImageLink) {
+  mapImageLink.addEventListener("click", function (event) {
+    // Redirect to Google Maps URL in a new tab
+    window.open("https://www.google.com/maps/place/Vaishnavi+Devi+construction/@18.6734797,73.7347006,883m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3bc2b140198fb621:0x143b11519f9f8d08!8m2!3d18.6734746!4d73.7372809!16s%2Fg%2F11mvrvt2rc?entry=ttu&g_ep=EgoyMDI0MTAwOS4wIKXMDSoASAFQAw%3D%3D", "_blank");
   });
 }
+// Get all images and modal elements
+const images = document.querySelectorAll('.gallery-item img');
+const modal = document.querySelector('.modal');
+const modalContent = document.querySelector('.modal-content');
+const closeModal = document.querySelector('.modal-close');
 
+// Add click event to each image
+images.forEach(image => {
+  image.addEventListener('click', function() {
+    modal.style.display = 'block';
+    modalContent.src = this.src; // Display the clicked image in the modal
+  });
+});
 
+// Close modal when close button is clicked
+closeModal.addEventListener('click', function() {
+  modal.style.display = 'none';
+});
 
-// page navigation variables
+// Close modal when clicking outside the modal content
+window.addEventListener('click', function(event) {
+  if (event.target === modal) {
+    modal.style.display = 'none';
+  }
+});
+
+// Page navigation variables
 const navigationLinks = document.querySelectorAll("[data-nav-link]");
 const pages = document.querySelectorAll("[data-page]");
 
-// add event to all nav link
-for (let i = 0; i < navigationLinks.length; i++) {
-  navigationLinks[i].addEventListener("click", function () {
+// Add event to all nav links
+if (navigationLinks.length > 0 && pages.length > 0) {
+  navigationLinks.forEach(link => {
+    link.addEventListener("click", function () {
+      // Remove active class from all nav links
+      navigationLinks.forEach(item => item.classList.remove("active"));
 
-    for (let i = 0; i < pages.length; i++) {
-      if (this.innerHTML.toLowerCase() === pages[i].dataset.page) {
-        pages[i].classList.add("active");
-        navigationLinks[i].classList.add("active");
-        window.scrollTo(0, 0);
-      } else {
-        pages[i].classList.remove("active");
-        navigationLinks[i].classList.remove("active");
+      // Add active class to the clicked nav link
+      this.classList.add("active");
+
+      // Get the target page from data-nav-link attribute
+      const target = this.getAttribute("data-nav-link");
+
+      // Remove active class from all pages
+      pages.forEach(page => page.classList.remove("active"));
+
+      // Add active class to the target page
+      const targetPage = document.querySelector(`[data-page="${target}"]`);
+      if (targetPage) {
+        targetPage.classList.add("active");
+        window.scrollTo(0, 0); // Scroll to top after navigation
       }
-    }
-
+    });
   });
 }
