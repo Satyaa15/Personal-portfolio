@@ -1644,7 +1644,7 @@ textarea.form-input::-webkit-resizer { display: none; }
   gap: 10px; /* Gap between grid items */
   padding: 20px;
   width: 100%;
-  max-width: 1200px; /* Optional: set a max width to limit the gallery size */
+  width: clamp(300px, 80%, 1200px);  /* Optional: set a max width to limit the gallery size */
   margin: auto; /* Center the gallery horizontally */
 }
 
