@@ -1711,6 +1711,10 @@ textarea.form-input::-webkit-resizer { display: none; }
     grid-template-columns: repeat(2, 1fr); /* Two photos per row on small screens */
     gap: 10px;
   }
+    .gallery-item {
+    width: 100%; /* Make each image take up full width */
+    height: 300px;
+    }
 
   .gallery-item img {
     width: 100%;
