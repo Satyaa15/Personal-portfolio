@@ -1650,7 +1650,7 @@ textarea.form-input::-webkit-resizer { display: none; }
 
 .gallery-item {
   width: 100%; /* Image should take up the full width of the grid cell */
-  height: auto;
+  height: 300px;
   aspect-ratio: 1; /* Ensure a square aspect ratio */
   overflow: hidden;
 }
