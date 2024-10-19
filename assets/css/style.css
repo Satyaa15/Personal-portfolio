@@ -1695,6 +1695,30 @@ textarea.form-input::-webkit-resizer { display: none; }
   color: white;
   cursor: pointer;
 }
+/* General styling for the gallery items */
+.gallery-item img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Media query for mobile devices */
+@media only screen and (max-width: 600px) {
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two photos per row on small screens */
+    gap: 10px;
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: auto;
+    object-fit: cover; /* Ensures the images maintain aspect ratio */
+  }
+}
+
 
 /* Responsive design */
 @media (max-width: 1024px) {
